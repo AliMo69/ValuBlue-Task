@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.3 (Python 3.9.6 on darwin)" generated="20240731 23:54:19.291" rpa="false" schemaversion="2">
+<suite id="s1" name="Api Smoke Tests" source="/Users/alimostafaei/PycharmProjects/Urbanease/Communities_Service_Test/ValueBlue/Api_Testing/Tests/api_smoke_tests.robot">
+<kw name="Create Object for Suite" type="SETUP">
+<doc>Create an object to be used in all test cases</doc>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${nested_data}</var>
+<arg>year=2019</arg>
+<arg>price=1849.99</arg>
+<arg>CPU model=Intel Core i9</arg>
+<arg>Hard disk size=1 TB</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240731 23:54:19.355" level="INFO">${nested_data} = {'year': '2019', 'price': '1849.99', 'CPU model': 'Intel Core i9', 'Hard disk size': '1 TB'}</msg>
+<status status="PASS" starttime="20240731 23:54:19.355" endtime="20240731 23:54:19.355"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${data}</var>
+<arg>name=Apple MacBook Pro 16</arg>
+<arg>data=${nested_data}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240731 23:54:19.355" level="INFO">${data} = {'name': 'Apple MacBook Pro 16', 'data': {'year': '2019', 'price': '1849.99', 'CPU model': 'Intel Core i9', 'Hard disk size': '1 TB'}}</msg>
+<status status="PASS" starttime="20240731 23:54:19.355" endtime="20240731 23:54:19.355"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240731 23:54:19.355" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20240731 23:54:19.355" endtime="20240731 23:54:19.355"/>
+</kw>
+<kw name="POST" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${BASE_URL}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request.</doc>
+<msg timestamp="20240731 23:54:19.854" level="INFO">POST Request : url=https://api.restful-api.dev/objects 
+ path_url=/objects 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '134'} 
+ body=b'{"name": "Apple MacBook Pro 16", "data": {"year": "2019", "price": "1849.99", "CPU model": "Intel Core i9", "Hard disk size": "1 TB"}}' 
+ </msg>
+<msg timestamp="20240731 23:54:19.855" level="INFO">POST Response : url=https://api.restful-api.dev/objects 
+ status=200, reason= 
+ headers={'Date': 'Wed, 31 Jul 2024 21:54:19 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'CF-Cache-Status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=jXia5drhl%2FwiZsKuJmCxbc45vbLlpBL2JWpnc8x7vEwoGnd%2F7AClBPcqXhZzSQ4sZtDzSTtA9teshHwVGi93gkjU2xgZeXO%2BgEd2VQhqEMB2RV7nm7UlOz8k3WUH%2BKtuR89xBiOI8zgGYCwy3KkmM4lF"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '8ac0d38878df0e84-AMS', 'Content-Encoding': 'br', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":"ff8081819108ddef01910ac971c50457","name":"Apple MacBook Pro 16","createdAt":"2024-07-31T21:54:19.717+00:00","data":{"year":"2019","price":"1849.99","CPU model":"Intel Core i9","Hard disk size":"1 TB"}} 
+ </msg>
+<msg timestamp="20240731 23:54:19.855" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:19.355" endtime="20240731 23:54:19.855"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20240731 23:54:19.857" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:19.855" endtime="20240731 23:54:19.857"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${json_response}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240731 23:54:19.858" level="INFO">${json_response} = {'id': 'ff8081819108ddef01910ac971c50457', 'name': 'Apple MacBook Pro 16', 'createdAt': '2024-07-31T21:54:19.717+00:00', 'data': {'year': '2019', 'price': '1849.99', 'CPU model': 'Intel Core i9', 'Har...</msg>
+<status status="PASS" starttime="20240731 23:54:19.857" endtime="20240731 23:54:19.858"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${object_id}</var>
+<arg>${json_response}[id]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240731 23:54:19.858" level="INFO">${object_id} = ff8081819108ddef01910ac971c50457</msg>
+<status status="PASS" starttime="20240731 23:54:19.858" endtime="20240731 23:54:19.858"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${OBJECT_ID}</arg>
+<arg>${object_id}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20240731 23:54:19.859" level="INFO">${OBJECT_ID} = ff8081819108ddef01910ac971c50457</msg>
+<status status="PASS" starttime="20240731 23:54:19.859" endtime="20240731 23:54:19.859"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Created object with ID: ${OBJECT_ID}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240731 23:54:19.859" level="INFO">Created object with ID: ff8081819108ddef01910ac971c50457</msg>
+<status status="PASS" starttime="20240731 23:54:19.859" endtime="20240731 23:54:19.859"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:19.355" endtime="20240731 23:54:19.859"/>
+</kw>
+<test id="s1-t1" name="Smoke Test: Retrieve Objects">
+<kw name="Given the API is accessible">
+<kw name="No Operation" library="BuiltIn">
+<doc>Does absolutely nothing.</doc>
+<status status="PASS" starttime="20240731 23:54:19.861" endtime="20240731 23:54:19.861"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:19.860" endtime="20240731 23:54:19.861"/>
+</kw>
+<kw name="When I send a GET request to retrieve objects">
+<kw name="GET" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${BASE_URL}</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20240731 23:54:20.447" level="INFO">GET Request : url=https://api.restful-api.dev/objects 
+ path_url=/objects 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20240731 23:54:20.447" level="INFO">GET Response : url=https://api.restful-api.dev/objects 
+ status=200, reason= 
+ headers={'Date': 'Wed, 31 Jul 2024 21:54:20 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'CF-Cache-Status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=Ge6EV9s06hwyQEiPX1sf7tYkJa8PYgsRdBQe3CiGYSrSeD47Rnbi5EOxITnquekR9jAN1Ao8G1JpQIydKmEAJ2tVk2lhZQ8sfkmcNl%2BJPOCBGoGj32oGmuKDYZQHYUDtaOnFoQ1SRmgff0%2FhiSEJcBMn"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '8ac0d38aed0e0bbc-AMS', 'Content-Encoding': 'br', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body=[{"id":"1","name":"Google Pixel 6 Pro","data":{"color":"Cloudy White","capacity":"128 GB"}},{"id":"2","name":"Apple iPhone 12 Mini, 256GB, Blue","data":null},{"id":"3","name":"Apple iPhone 12 Pro Max","data":{"color":"Cloudy White","capacity GB":512}},{"id":"4","name":"Apple iPhone 11, 64GB","data":{"price":389.99,"color":"Purple"}},{"id":"5","name":"Samsung Galaxy Z Fold2","data":{"price":689.99,"color":"Brown"}},{"id":"6","name":"Apple AirPods","data":{"generation":"3rd","price":120}},{"id":"7","name":"Apple MacBook Pro 16","data":{"year":2019,"price":1849.99,"CPU model":"Intel Core i9","Hard disk size":"1 TB"}},{"id":"8","name":"Apple Watch Series 8","data":{"Strap Colour":"Elderberry","Case Size":"41mm"}},{"id":"9","name":"Beats Studio3 Wireless","data":{"Color":"Red","Description":"High-performance wireless noise cancelling headphones"}},{"id":"10","name":"Apple iPad Mini 5th Gen","data":{"Capacity":"64 GB","Screen size":7.9}},{"id":"11","name":"Apple iPad Mini 5th Gen","data":{"Capacity":"254 GB","Screen size":7.9}},{"id":"12","name":"Apple iPad Air","data":{"Generation":"4th","Price":"419.99","Capacity":"64 GB"}},{"id":"13","name":"Apple iPad Air","data":{"Generation":"4th","Price":"519.99","Capacity":"256 GB"}}] 
+ </msg>
+<msg timestamp="20240731 23:54:20.448" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:19.861" endtime="20240731 23:54:20.448"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20240731 23:54:20.449" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:20.449" endtime="20240731 23:54:20.449"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:19.861" endtime="20240731 23:54:20.450"/>
+</kw>
+<kw name="Then the response status code should be 200">
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20240731 23:54:20.451" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:20.450" endtime="20240731 23:54:20.451"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:20.450" endtime="20240731 23:54:20.451"/>
+</kw>
+<kw name="And the first object should have the correct structure">
+<kw name="Set Variable" library="BuiltIn">
+<var>${first_object}</var>
+<arg>${response.json()}[0]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240731 23:54:20.453" level="INFO">${first_object} = {'id': '1', 'name': 'Google Pixel 6 Pro', 'data': {'color': 'Cloudy White', 'capacity': '128 GB'}}</msg>
+<status status="PASS" starttime="20240731 23:54:20.452" endtime="20240731 23:54:20.453"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${first_object}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:20.453" endtime="20240731 23:54:20.453"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${first_object}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:20.453" endtime="20240731 23:54:20.454"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${first_object}</arg>
+<arg>data</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:20.454" endtime="20240731 23:54:20.454"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:20.452" endtime="20240731 23:54:20.454"/>
+</kw>
+<doc>Quick test to verify the GET /objects endpoint</doc>
+<status status="PASS" starttime="20240731 23:54:19.860" endtime="20240731 23:54:20.454"/>
+</test>
+<test id="s1-t2" name="Smoke Test: Create New Object">
+<kw name="Given the API is accessible">
+<kw name="No Operation" library="BuiltIn">
+<doc>Does absolutely nothing.</doc>
+<status status="PASS" starttime="20240731 23:54:20.455" endtime="20240731 23:54:20.455"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:20.455" endtime="20240731 23:54:20.455"/>
+</kw>
+<kw name="When I send a POST request to create a new object">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${nested_data}</var>
+<arg>year=2019</arg>
+<arg>price=1849.99</arg>
+<arg>CPU model=Intel Core i9</arg>
+<arg>Hard disk size=1 TB</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240731 23:54:20.456" level="INFO">${nested_data} = {'year': '2019', 'price': '1849.99', 'CPU model': 'Intel Core i9', 'Hard disk size': '1 TB'}</msg>
+<status status="PASS" starttime="20240731 23:54:20.456" endtime="20240731 23:54:20.456"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${data}</var>
+<arg>name=Apple MacBook Pro 16</arg>
+<arg>data=${nested_data}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240731 23:54:20.456" level="INFO">${data} = {'name': 'Apple MacBook Pro 16', 'data': {'year': '2019', 'price': '1849.99', 'CPU model': 'Intel Core i9', 'Hard disk size': '1 TB'}}</msg>
+<status status="PASS" starttime="20240731 23:54:20.456" endtime="20240731 23:54:20.456"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240731 23:54:20.457" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20240731 23:54:20.457" endtime="20240731 23:54:20.457"/>
+</kw>
+<kw name="POST" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${BASE_URL}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request.</doc>
+<msg timestamp="20240731 23:54:20.919" level="INFO">POST Request : url=https://api.restful-api.dev/objects 
+ path_url=/objects 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '134'} 
+ body=b'{"name": "Apple MacBook Pro 16", "data": {"year": "2019", "price": "1849.99", "CPU model": "Intel Core i9", "Hard disk size": "1 TB"}}' 
+ </msg>
+<msg timestamp="20240731 23:54:20.919" level="INFO">POST Response : url=https://api.restful-api.dev/objects 
+ status=200, reason= 
+ headers={'Date': 'Wed, 31 Jul 2024 21:54:20 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=fdA3CTlQ4fUEjRoTAKbbeD15imyz6wiOzEjJmVg0Rzih4%2Bh44SjYsXZzwd9HnOv8BTN%2BusEcBbQea4Z%2F5fP8htSuO0UFXgRkHlkiSbVfgZ8nJi%2F99e5qM0xTJ39nOMy55%2FvQX1RylIaIQz0WrXgaxX%2BI"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '8ac0d38e8a4d0e50-AMS', 'Content-Encoding': 'br', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":"ff8081819108ddef01910ac975c60458","name":"Apple MacBook Pro 16","createdAt":"2024-07-31T21:54:20.743+00:00","data":{"year":"2019","price":"1849.99","CPU model":"Intel Core i9","Hard disk size":"1 TB"}} 
+ </msg>
+<msg timestamp="20240731 23:54:20.920" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:20.457" endtime="20240731 23:54:20.920"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20240731 23:54:20.921" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:20.920" endtime="20240731 23:54:20.921"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:20.455" endtime="20240731 23:54:20.921"/>
+</kw>
+<kw name="Then the response status code should be 200">
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20240731 23:54:20.922" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:20.922" endtime="20240731 23:54:20.922"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:20.921" endtime="20240731 23:54:20.923"/>
+</kw>
+<kw name="And the response should contain the created object details">
+<kw name="Set Variable" library="BuiltIn">
+<var>${json_response}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240731 23:54:20.924" level="INFO">${json_response} = {'id': 'ff8081819108ddef01910ac975c60458', 'name': 'Apple MacBook Pro 16', 'createdAt': '2024-07-31T21:54:20.743+00:00', 'data': {'year': '2019', 'price': '1849.99', 'CPU model': 'Intel Core i9', 'Har...</msg>
+<status status="PASS" starttime="20240731 23:54:20.923" endtime="20240731 23:54:20.924"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${json_response}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:20.924" endtime="20240731 23:54:20.924"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${json_response}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:20.924" endtime="20240731 23:54:20.924"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${json_response}</arg>
+<arg>createdAt</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:20.925" endtime="20240731 23:54:20.925"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${json_response}</arg>
+<arg>data</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:20.925" endtime="20240731 23:54:20.925"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${json_response}[name]</arg>
+<arg>Apple MacBook Pro 16</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20240731 23:54:20.925" endtime="20240731 23:54:20.925"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${json_response}[data][year]</arg>
+<arg>2019</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" starttime="20240731 23:54:20.925" endtime="20240731 23:54:20.926"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${json_response}[data][price]</arg>
+<arg>1849.99</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" starttime="20240731 23:54:20.926" endtime="20240731 23:54:20.926"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${json_response}[data][CPU model]</arg>
+<arg>Intel Core i9</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20240731 23:54:20.926" endtime="20240731 23:54:20.926"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:20.923" endtime="20240731 23:54:20.926"/>
+</kw>
+<doc>Quick test to verify creating a new object</doc>
+<status status="PASS" starttime="20240731 23:54:20.454" endtime="20240731 23:54:20.927"/>
+</test>
+<test id="s1-t3" name="Smoke Test: Update Existing Object">
+<kw name="Given the API is accessible">
+<kw name="No Operation" library="BuiltIn">
+<doc>Does absolutely nothing.</doc>
+<status status="PASS" starttime="20240731 23:54:20.928" endtime="20240731 23:54:20.928"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:20.927" endtime="20240731 23:54:20.928"/>
+</kw>
+<kw name="When I send a PUT request to update an existing object">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${nested_data}</var>
+<arg>year=2019</arg>
+<arg>price=2049.99</arg>
+<arg>CPU model=Intel Core i9</arg>
+<arg>Hard disk size=1 TB</arg>
+<arg>color=silver</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240731 23:54:20.928" level="INFO">${nested_data} = {'year': '2019', 'price': '2049.99', 'CPU model': 'Intel Core i9', 'Hard disk size': '1 TB', 'color': 'silver'}</msg>
+<status status="PASS" starttime="20240731 23:54:20.928" endtime="20240731 23:54:20.928"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${data}</var>
+<arg>name=Apple MacBook Pro 16</arg>
+<arg>data=${nested_data}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240731 23:54:20.929" level="INFO">${data} = {'name': 'Apple MacBook Pro 16', 'data': {'year': '2019', 'price': '2049.99', 'CPU model': 'Intel Core i9', 'Hard disk size': '1 TB', 'color': 'silver'}}</msg>
+<status status="PASS" starttime="20240731 23:54:20.928" endtime="20240731 23:54:20.929"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240731 23:54:20.929" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20240731 23:54:20.929" endtime="20240731 23:54:20.929"/>
+</kw>
+<kw name="PUT" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${BASE_URL}/${OBJECT_ID}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a PUT request.</doc>
+<msg timestamp="20240731 23:54:21.325" level="INFO">PUT Request : url=https://api.restful-api.dev/objects/ff8081819108ddef01910ac971c50457 
+ path_url=/objects/ff8081819108ddef01910ac971c50457 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '153'} 
+ body=b'{"name": "Apple MacBook Pro 16", "data": {"year": "2019", "price": "2049.99", "CPU model": "Intel Core i9", "Hard disk size": "1 TB", "color": "silver"}}' 
+ </msg>
+<msg timestamp="20240731 23:54:21.325" level="INFO">PUT Response : url=https://api.restful-api.dev/objects/ff8081819108ddef01910ac971c50457 
+ status=200, reason= 
+ headers={'Date': 'Wed, 31 Jul 2024 21:54:21 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'CF-Cache-Status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=QbdnVXEEhcqH%2FFkaWabtC9oO7CfeoxtQB7lPGupP9gBLbQmQde%2BJY1t15pQDrCsmMqhZ8Y%2FLHCJ8Q%2BxMvt%2B9R8X0jjWQKT2MTnVzZGBf6ikclQq14pOeLuojJ28IAafj8IoiSoOu4hGlTknlt6pIVmSX"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '8ac0d39189b6a008-AMS', 'Content-Encoding': 'br', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":"ff8081819108ddef01910ac971c50457","name":"Apple MacBook Pro 16","updatedAt":"2024-07-31T21:54:21.201+00:00","data":{"year":"2019","price":"2049.99","CPU model":"Intel Core i9","Hard disk size":"1 TB","color":"silver"}} 
+ </msg>
+<msg timestamp="20240731 23:54:21.326" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:20.929" endtime="20240731 23:54:21.326"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20240731 23:54:21.327" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:21.326" endtime="20240731 23:54:21.327"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:20.928" endtime="20240731 23:54:21.327"/>
+</kw>
+<kw name="Then the response status code should be 200">
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20240731 23:54:21.329" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:21.328" endtime="20240731 23:54:21.329"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:21.327" endtime="20240731 23:54:21.329"/>
+</kw>
+<kw name="And the response should contain the updated object details">
+<kw name="Set Variable" library="BuiltIn">
+<var>${json_response}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240731 23:54:21.330" level="INFO">${json_response} = {'id': 'ff8081819108ddef01910ac971c50457', 'name': 'Apple MacBook Pro 16', 'updatedAt': '2024-07-31T21:54:21.201+00:00', 'data': {'year': '2019', 'price': '2049.99', 'CPU model': 'Intel Core i9', 'Har...</msg>
+<status status="PASS" starttime="20240731 23:54:21.329" endtime="20240731 23:54:21.330"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${json_response}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:21.330" endtime="20240731 23:54:21.331"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${json_response}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:21.331" endtime="20240731 23:54:21.331"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${json_response}</arg>
+<arg>updatedAt</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:21.331" endtime="20240731 23:54:21.331"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${json_response}</arg>
+<arg>data</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:21.331" endtime="20240731 23:54:21.331"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${json_response}[name]</arg>
+<arg>Apple MacBook Pro 16</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20240731 23:54:21.332" endtime="20240731 23:54:21.332"/>
+</kw>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${json_response}[data][year]</arg>
+<arg>2019</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" starttime="20240731 23:54:21.332" endtime="20240731 23:54:21.332"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${json_response}[data][price]</arg>
+<arg>2049.99</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" starttime="20240731 23:54:21.332" endtime="20240731 23:54:21.332"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${json_response}[data][CPU model]</arg>
+<arg>Intel Core i9</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20240731 23:54:21.332" endtime="20240731 23:54:21.333"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${json_response}[data][color]</arg>
+<arg>silver</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20240731 23:54:21.333" endtime="20240731 23:54:21.333"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:21.329" endtime="20240731 23:54:21.333"/>
+</kw>
+<doc>Quick test to verify updating an existing object</doc>
+<status status="PASS" starttime="20240731 23:54:20.927" endtime="20240731 23:54:21.333"/>
+</test>
+<test id="s1-t4" name="Smoke Test: Delete Existing Object">
+<kw name="Given the API is accessible">
+<kw name="No Operation" library="BuiltIn">
+<doc>Does absolutely nothing.</doc>
+<status status="PASS" starttime="20240731 23:54:21.335" endtime="20240731 23:54:21.335"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:21.334" endtime="20240731 23:54:21.336"/>
+</kw>
+<kw name="When I send a DELETE request to delete an existing object">
+<kw name="DELETE" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${BASE_URL}/${OBJECT_ID}</arg>
+<doc>Sends a DELETE request.</doc>
+<msg timestamp="20240731 23:54:21.744" level="INFO">DELETE Request : url=https://api.restful-api.dev/objects/ff8081819108ddef01910ac971c50457 
+ path_url=/objects/ff8081819108ddef01910ac971c50457 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20240731 23:54:21.744" level="INFO">DELETE Response : url=https://api.restful-api.dev/objects/ff8081819108ddef01910ac971c50457 
+ status=200, reason= 
+ headers={'Date': 'Wed, 31 Jul 2024 21:54:21 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'CF-Cache-Status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=i43SdppK5Uj4i%2BVna9p2W%2F9S935O4U7NvY0YjH4KriL4WcXeZFIbkT8lnzZi7nhIUDSm73bhzzNo%2B4hCHcpOE3PTlzzfA633wF0Xu5EdfhK2RiXGOcWyKBOD3OnBaVrY4TGk1yYbaNKKmg6e%2BuMwErlK"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '8ac0d3941a3db8fa-AMS', 'Content-Encoding': 'br', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"message":"Object with id = ff8081819108ddef01910ac971c50457 has been deleted."} 
+ </msg>
+<msg timestamp="20240731 23:54:21.746" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:21.336" endtime="20240731 23:54:21.746"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20240731 23:54:21.747" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:21.747" endtime="20240731 23:54:21.747"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:21.336" endtime="20240731 23:54:21.747"/>
+</kw>
+<kw name="Then the response status code should be 200">
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20240731 23:54:21.749" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20240731 23:54:21.748" endtime="20240731 23:54:21.749"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:21.748" endtime="20240731 23:54:21.749"/>
+</kw>
+<kw name="And the response should confirm the deletion">
+<kw name="Set Variable" library="BuiltIn">
+<var>${json_response}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240731 23:54:21.751" level="INFO">${json_response} = {'message': 'Object with id = ff8081819108ddef01910ac971c50457 has been deleted.'}</msg>
+<status status="PASS" starttime="20240731 23:54:21.750" endtime="20240731 23:54:21.751"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${json_response}</arg>
+<arg>message</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" starttime="20240731 23:54:21.751" endtime="20240731 23:54:21.751"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${json_response}[message]</arg>
+<arg>Object with id = ${OBJECT_ID} has been deleted.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20240731 23:54:21.751" endtime="20240731 23:54:21.752"/>
+</kw>
+<status status="PASS" starttime="20240731 23:54:21.749" endtime="20240731 23:54:21.752"/>
+</kw>
+<doc>Quick test to verify deleting an existing object</doc>
+<status status="PASS" starttime="20240731 23:54:21.334" endtime="20240731 23:54:21.752"/>
+</test>
+<status status="PASS" starttime="20240731 23:54:19.292" endtime="20240731 23:54:21.753"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="4" fail="0" skip="0" id="s1" name="Api Smoke Tests">Api Smoke Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

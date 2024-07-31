@@ -1,5 +1,3 @@
-import time
-
 from behave import *
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -7,6 +5,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 "Example steps for the IANA website"
+
+
 @when('I start the browser')
 def step_start_browser(context):
     context.driver = webdriver.Chrome()
@@ -14,7 +14,7 @@ def step_start_browser(context):
 
 
 @when("I Navigate to '{url}'")
-def step_navigate_to(context,url):
+def step_navigate_to(context, url):
     context.driver.get(url)
 
 
@@ -57,6 +57,7 @@ def step_check_domain_names_box(context):
             raise AssertionError(f"Expected 'Root Zone Management' in the second item, but found: {second_item_text}")
     else:
         raise AssertionError(f"List does not have at least two items. Found {len(list_items)} items.")
+
 
 @then('I close the browser')
 def step_close_browser(context):
