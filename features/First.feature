@@ -1,5 +1,5 @@
 Feature: Example
-
+# Feature File for the Example
 Scenario: FinishME
     when I start the browser
     And  I Navigate to 'https://www.example.com/'

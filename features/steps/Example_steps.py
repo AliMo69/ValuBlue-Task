@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-
+"Example steps for the IANA website"
 @when('I start the browser')
 def step_start_browser(context):
     context.driver = webdriver.Chrome()
